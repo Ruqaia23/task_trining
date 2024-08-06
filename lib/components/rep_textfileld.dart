@@ -3,9 +3,15 @@ import 'package:task_app/app_str.dart';
 
 class RepTextFiedl extends StatelessWidget {
   const RepTextFiedl(
-      {super.key, required this.controller, this.isForDescription = false});
+      {super.key,
+      required this.controller,
+      this.isForDescription = false,
+      required this.onFieldSubmitted,
+      required this.onChanged});
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
+  final Function(String)? onFieldSubmitted;
+  final Function(String)? onChanged;
   final bool isForDescription;
 
   @override
@@ -36,8 +42,8 @@ class RepTextFiedl extends StatelessWidget {
               borderSide: BorderSide(color: Colors.grey.shade400),
             ),
           ),
-          onFieldSubmitted: (value) {},
-          onChanged: (value) {},
+          onFieldSubmitted: onFieldSubmitted,
+          onChanged: onChanged,
         ),
       ),
     );

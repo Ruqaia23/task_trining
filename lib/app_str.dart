@@ -9,5 +9,7 @@ class AppStr {
   static const String addNote = "Add Note ";
   static const String deleteTask = "Delete Task ";
   static const String AddTaskString = "Add Task ";
+  static const String oopsMsg = "OOPS";
+
   static const String UpdateTaskString = "Update Task ";
 }
