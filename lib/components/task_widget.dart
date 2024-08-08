@@ -21,7 +21,7 @@ class _TaskWidgetState extends State<TaskWidget> {
       TextEditingController();
 
   @override
-  void instState() {
+  void initState() {
     teskEditingControllerForTitle.text = widget.task.title;
     testEditingControllerForSubTitle.text = widget.task.subTitle;
     super.initState();
@@ -51,8 +51,9 @@ class _TaskWidgetState extends State<TaskWidget> {
       child: AnimatedContainer(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-            color: const Color.fromRGBO(154, 184, 222, 1),
-            //: Color.fromRGBO(234, 120, 83, 1),
+            color: widget.task.isCompleted
+                ? Color.fromRGBO(154, 184, 222, 1)
+                : Color.fromRGBO(244, 237, 201, 1),
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(

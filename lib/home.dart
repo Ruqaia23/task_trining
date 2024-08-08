@@ -1,5 +1,10 @@
+import 'dart:io';
+
+import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 import 'package:task_app/app_str.dart';
@@ -38,13 +43,15 @@ class _HomePageState extends State<HomePage> {
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                        builder: (_) => TaskView(
-                              task: null,
-                              titleTaskController: null,
-                              descrptionTaskController: null,
-                            )));
+                  context,
+                  CupertinoPageRoute(
+                    builder: (_) => TaskView(
+                      task: null,
+                      titleTaskController: null,
+                      descrptionTaskController: null,
+                    ),
+                  ),
+                );
               },
               child: Container(
                 width: 70,
@@ -61,15 +68,23 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            body: _buildHomeBody(
-              base,
-              tasks,
-            ),
+            body: _buildHomeBody(base: base, tasks: tasks),
           );
         });
   }
+}
 
-  Widget _buildHomeBody(BaseWidget base, List<Task> tasks) {
+class _buildHomeBody extends StatelessWidget {
+  final BaseWidget base;
+  final List<Task> tasks;
+
+  const _buildHomeBody({
+    required this.base,
+    required this.tasks,
+  });
+  Widget build(BuildContext context) {
+    //
+    //Widget _buildHomeBody(BaseWidget base, List<Task> tasks) {
     //
 
     return SizedBox(
@@ -107,18 +122,7 @@ class _HomePageState extends State<HomePage> {
             )
           : Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // FadeIn(
-                //   child: SizedBox(
-                //     width: 200,
-                //     height: 200,
-                //     child: Lottie.asset(
-                //       lottieURL,
-                //       animate: tasks.isNotEmpty ? false : true,
-                //     ),
-                //   ),
-                // ),
-              ],
+              children: [],
             ),
     );
   }

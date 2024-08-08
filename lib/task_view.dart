@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:task_app/app_str.dart';
@@ -31,14 +29,8 @@ class _TaskViewState extends State<TaskView> {
   var title;
   var subTitle;
 
-  bool isTaskAlreadyExist() {
-    if (widget.titleTaskController?.text == null &&
-        widget.descrptionTaskController?.text == null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  bool isTaskAlreadyExist() => (widget.titleTaskController?.text == null &&
+      widget.descrptionTaskController?.text == null);
 
   dynamic isTaskAlreadyExistUpdateOtherWiseCreate() {
     if (widget.titleTaskController?.text != null &&
@@ -96,7 +88,9 @@ class _TaskViewState extends State<TaskView> {
               child: Column(
                 children: [
                   //Top side Text
-                  _buildTopside(),
+                  _buildTopside(
+                    isTaskAlreadyExist: isTaskAlreadyExist(),
+                  ),
                   SizedBox(
                     width: double.infinity,
                     height: 530,
@@ -133,7 +127,12 @@ class _TaskViewState extends State<TaskView> {
                         SizedBox(
                           height: 150,
                         ),
-                        _buildBottomSideBottons()
+                        _buildBottomSideBottons(
+                          isTaskAlreadyExist: isTaskAlreadyExist(),
+                          deleteTask: deleteTask(),
+                          isTaskAlreadyExistUpdateOtherWiseCreate:
+                              isTaskAlreadyExistUpdateOtherWiseCreate(),
+                        ),
                       ],
                     ),
                   ),
@@ -143,16 +142,31 @@ class _TaskViewState extends State<TaskView> {
           )),
     );
   }
+}
 
-  Widget _buildBottomSideBottons() {
+class _buildBottomSideBottons extends StatelessWidget {
+  final bool isTaskAlreadyExist;
+
+  final deleteTask;
+
+  final isTaskAlreadyExistUpdateOtherWiseCreate;
+
+  const _buildBottomSideBottons({
+    required this.isTaskAlreadyExist,
+    required this.deleteTask,
+    required this.isTaskAlreadyExistUpdateOtherWiseCreate,
+  });
+
+  Widget build(BuildContext context) {
+    // Widget _buildBottomSideBottons() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Row(
-        mainAxisAlignment: isTaskAlreadyExist()
+        mainAxisAlignment: isTaskAlreadyExist
             ? MainAxisAlignment.center
             : MainAxisAlignment.spaceEvenly,
         children: [
-          isTaskAlreadyExist()
+          isTaskAlreadyExist
               ? Container()
               :
               //delet current task
@@ -184,9 +198,7 @@ class _TaskViewState extends State<TaskView> {
 
           MaterialButton(
             onPressed: () {
-              isTaskAlreadyExist()
-                  ? AppStr.AddTaskString
-                  : AppStr.UpdateTaskString;
+              isTaskAlreadyExistUpdateOtherWiseCreate();
             },
             minWidth: 150,
             color: Color.fromRGBO(0, 202, 131, 1),
@@ -206,8 +218,15 @@ class _TaskViewState extends State<TaskView> {
       ),
     );
   }
+}
 
-  Widget _buildTopside() {
+class _buildTopside extends StatelessWidget {
+  final bool isTaskAlreadyExist;
+
+  const _buildTopside({
+    required this.isTaskAlreadyExist,
+  });
+  Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: 100,
@@ -223,7 +242,7 @@ class _TaskViewState extends State<TaskView> {
           ),
           RichText(
             text: TextSpan(
-                text: isTaskAlreadyExist()
+                text: isTaskAlreadyExist
                     ? AppStr.AddNewTask
                     : AppStr.updateCurrentTask,
                 style: TextStyle(
