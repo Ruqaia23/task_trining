@@ -81,9 +81,9 @@ class _TaskViewState extends State<TaskView> {
               ],
             ),
           ),
-          body: SizedBox(
-            width: double.infinity,
-            height: double.infinity,
+          body: Container(
+            width: 400,
+            height: 600,
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -91,9 +91,9 @@ class _TaskViewState extends State<TaskView> {
                   _buildTopside(
                     isTaskAlreadyExist: isTaskAlreadyExist(),
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 530,
+                  Container(
+                    width: 400,
+                    height: 550,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -124,14 +124,14 @@ class _TaskViewState extends State<TaskView> {
                             subTitle = inputSubTitle;
                           },
                         ),
-                        SizedBox(
+                        Container(
                           height: 150,
                         ),
                         _buildBottomSideBottons(
                           isTaskAlreadyExist: isTaskAlreadyExist(),
-                          deleteTask: deleteTask(),
+                          deleteTask: deleteTask,
                           isTaskAlreadyExistUpdateOtherWiseCreate:
-                              isTaskAlreadyExistUpdateOtherWiseCreate(),
+                              isTaskAlreadyExistUpdateOtherWiseCreate,
                         ),
                       ],
                     ),
@@ -227,9 +227,9 @@ class _buildTopside extends StatelessWidget {
     required this.isTaskAlreadyExist,
   });
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 100,
+    return Container(
+      width: 400,
+      height: 50,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,

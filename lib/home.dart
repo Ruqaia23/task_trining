@@ -88,8 +88,8 @@ class _buildHomeBody extends StatelessWidget {
     //
 
     return SizedBox(
-      width: double.infinity,
-      height: 500,
+      width: 500,
+      height: 900,
       child: tasks.isNotEmpty
           ? ListView.builder(
               itemCount: tasks.length,
